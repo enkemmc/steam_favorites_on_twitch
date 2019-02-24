@@ -1,21 +1,26 @@
 {
   "name": "awsapp",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "app.js",
   "dependencies": {
+    "cors": "^2.8.5",
+    "puppeteer": "^1.12.2",
     "react": "^16.8.3",
+    "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.8.3",
-    "react-scripts": "2.1.5"
+    "react-scripts": "^2.1.5"
   },
+  "devDependencies": {},
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=80 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "browserslist": [
     ">0.2%",
     "not dead",

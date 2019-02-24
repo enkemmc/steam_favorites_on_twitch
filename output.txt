@@ -1,0 +1,536 @@
+
+Active Connections
+
+  Proto  Local Address          Foreign Address        State
+  TCP    0.0.0.0:135            0.0.0.0:0              LISTENING
+  RpcSs
+ [svchost.exe]
+  TCP    0.0.0.0:445            0.0.0.0:0              LISTENING
+ Can not obtain ownership information
+  TCP    0.0.0.0:554            0.0.0.0:0              LISTENING
+ [wmpnetwk.exe]
+  TCP    0.0.0.0:1801           0.0.0.0:0              LISTENING
+ [mqsvc.exe]
+  TCP    0.0.0.0:2103           0.0.0.0:0              LISTENING
+ [mqsvc.exe]
+  TCP    0.0.0.0:2105           0.0.0.0:0              LISTENING
+ [mqsvc.exe]
+  TCP    0.0.0.0:2107           0.0.0.0:0              LISTENING
+ [mqsvc.exe]
+  TCP    0.0.0.0:2179           0.0.0.0:0              LISTENING
+ [vmms.exe]
+  TCP    0.0.0.0:2869           0.0.0.0:0              LISTENING
+ Can not obtain ownership information
+  TCP    0.0.0.0:5040           0.0.0.0:0              LISTENING
+  CDPSvc
+ [svchost.exe]
+  TCP    0.0.0.0:10243          0.0.0.0:0              LISTENING
+ Can not obtain ownership information
+  TCP    0.0.0.0:17729          0.0.0.0:0              LISTENING
+ [HiPatchService.exe]
+  TCP    0.0.0.0:27036          0.0.0.0:0              LISTENING
+ [Steam.exe]
+  TCP    0.0.0.0:49664          0.0.0.0:0              LISTENING
+ Can not obtain ownership information
+  TCP    0.0.0.0:49665          0.0.0.0:0              LISTENING
+  EventLog
+ [svchost.exe]
+  TCP    0.0.0.0:49666          0.0.0.0:0              LISTENING
+  Schedule
+ [svchost.exe]
+  TCP    0.0.0.0:49667          0.0.0.0:0              LISTENING
+  SessionEnv
+ [svchost.exe]
+  TCP    0.0.0.0:49669          0.0.0.0:0              LISTENING
+ [spoolsv.exe]
+  TCP    0.0.0.0:49670          0.0.0.0:0              LISTENING
+ [mqsvc.exe]
+  TCP    0.0.0.0:49690          0.0.0.0:0              LISTENING
+ Can not obtain ownership information
+  TCP    0.0.0.0:49723          0.0.0.0:0              LISTENING
+ [lsass.exe]
+  TCP    0.0.0.0:54235          0.0.0.0:0              LISTENING
+ Can not obtain ownership information
+  TCP    0.0.0.0:54236          0.0.0.0:0              LISTENING
+ Can not obtain ownership information
+  TCP    10.0.75.1:139          0.0.0.0:0              LISTENING
+ Can not obtain ownership information
+  TCP    127.0.0.1:843          0.0.0.0:0              LISTENING
+ [OctoshapeClient.exe]
+  TCP    127.0.0.1:1120         0.0.0.0:0              LISTENING
+ [Agent.exe]
+  TCP    127.0.0.1:1120         127.0.0.1:49194        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49197        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49199        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49202        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49205        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49212        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49215        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49218        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49222        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49225        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49227        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49228        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49229        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49230        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49233        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49236        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49239        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49248        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49251        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49255        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49259        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49262        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49269        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49272        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49276        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49279        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49282        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49284        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49287        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49290        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49294        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49297        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49300        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49304        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49307        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49309        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49310        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49311        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49312        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49315        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49318        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49321        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49325        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49328        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49332        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49335        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49338        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49343        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49346        TIME_WAIT
+  TCP    127.0.0.1:1120         127.0.0.1:49350        TIME_WAIT
+  TCP    127.0.0.1:3213         0.0.0.0:0              LISTENING
+ [OriginWebHelperService.exe]
+  TCP    127.0.0.1:5354         0.0.0.0:0              LISTENING
+ [mDNSResponder.exe]
+  TCP    127.0.0.1:6463         0.0.0.0:0              LISTENING
+ [Discord.exe]
+  TCP    127.0.0.1:6498         0.0.0.0:0              LISTENING
+ [OctoshapeClient.exe]
+  TCP    127.0.0.1:9005         0.0.0.0:0              LISTENING
+ [CiscoVideoGuardMonitor.exe]
+  TCP    127.0.0.1:9015         0.0.0.0:0              LISTENING
+ [CiscoVideoGuardMonitor.exe]
+  TCP    127.0.0.1:12216        0.0.0.0:0              LISTENING
+ [Code.exe]
+  TCP    127.0.0.1:22885        0.0.0.0:0              LISTENING
+ [Battle.net.exe]
+  TCP    127.0.0.1:27017        0.0.0.0:0              LISTENING
+ [mongod.exe]
+  TCP    127.0.0.1:27060        0.0.0.0:0              LISTENING
+ [Steam.exe]
+  TCP    127.0.0.1:49349        127.0.0.1:9229         SYN_SENT
+ [chrome.exe]
+  TCP    127.0.0.1:49492        127.0.0.1:49493        ESTABLISHED
+ [Battle.net.exe]
+  TCP    127.0.0.1:49493        127.0.0.1:49492        ESTABLISHED
+ [Battle.net.exe]
+  TCP    127.0.0.1:49898        127.0.0.1:49899        ESTABLISHED
+ [OctoshapeClient.exe]
+  TCP    127.0.0.1:49899        127.0.0.1:49898        ESTABLISHED
+ [OctoshapeClient.exe]
+  TCP    127.0.0.1:49900        127.0.0.1:49901        ESTABLISHED
+ [OctoshapeClient.exe]
+  TCP    127.0.0.1:49901        127.0.0.1:49900        ESTABLISHED
+ [OctoshapeClient.exe]
+  TCP    127.0.0.1:49902        127.0.0.1:49904        ESTABLISHED
+ [OctoshapeClient.exe]
+  TCP    127.0.0.1:49904        127.0.0.1:49902        ESTABLISHED
+ [OctoshapeClient.exe]
+  TCP    127.0.0.1:50010        127.0.0.1:65001        ESTABLISHED
+ [nvcontainer.exe]
+  TCP    127.0.0.1:50015        0.0.0.0:0              LISTENING
+ [NVIDIA Web Helper.exe]
+  TCP    127.0.0.1:50911        0.0.0.0:0              LISTENING
+ [ss_conn_service.exe]
+  TCP    127.0.0.1:58728        0.0.0.0:0              LISTENING
+ [sqlservr.exe]
+  TCP    127.0.0.1:65000        0.0.0.0:0              LISTENING
+ [nvcontainer.exe]
+  TCP    127.0.0.1:65001        0.0.0.0:0              LISTENING
+ [nvcontainer.exe]
+  TCP    127.0.0.1:65001        127.0.0.1:50010        ESTABLISHED
+ [nvcontainer.exe]
+  TCP    172.20.128.1:139       0.0.0.0:0              LISTENING
+ Can not obtain ownership information
+  TCP    192.168.1.4:139        0.0.0.0:0              LISTENING
+ Can not obtain ownership information
+  TCP    192.168.1.4:49207      104.17.25.249:443      ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:49240      151.101.1.69:443       ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:49241      192.0.73.2:443         ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:49242      104.16.24.34:443       ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:49244      23.35.108.127:443      ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:49245      35.167.24.46:443       CLOSE_WAIT
+ [chrome.exe]
+  TCP    192.168.1.4:49256      13.107.18.11:443       ESTABLISHED
+ [SearchUI.exe]
+  TCP    192.168.1.4:49512      24.105.28.10:1119      ESTABLISHED
+ [Battle.net.exe]
+  TCP    192.168.1.4:50687      18.211.109.50:443      ESTABLISHED
+ [Postman.exe]
+  TCP    192.168.1.4:52594      34.211.63.56:443       ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:52595      52.25.68.15:443        ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:55050      192.30.253.125:443     ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:57757      192.168.1.2:8009       ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:57877      23.45.229.36:443       CLOSE_WAIT
+ [WinStore.App.exe]
+  TCP    192.168.1.4:57879      23.45.231.50:80        CLOSE_WAIT
+ [WinStore.App.exe]
+  TCP    192.168.1.4:57880      23.45.231.50:80        CLOSE_WAIT
+ [WinStore.App.exe]
+  TCP    192.168.1.4:57881      23.45.231.50:80        CLOSE_WAIT
+ [WinStore.App.exe]
+  TCP    192.168.1.4:57882      23.45.231.50:80        CLOSE_WAIT
+ [WinStore.App.exe]
+  TCP    192.168.1.4:57883      23.45.231.50:80        CLOSE_WAIT
+ [WinStore.App.exe]
+  TCP    192.168.1.4:57884      23.45.231.50:80        CLOSE_WAIT
+ [WinStore.App.exe]
+  TCP    192.168.1.4:57886      23.45.228.133:80       CLOSE_WAIT
+ [WinStore.App.exe]
+  TCP    192.168.1.4:57887      23.45.228.133:80       CLOSE_WAIT
+ [WinStore.App.exe]
+  TCP    192.168.1.4:57889      23.45.229.36:443       CLOSE_WAIT
+ [WinStore.App.exe]
+  TCP    192.168.1.4:57899      23.45.229.36:443       CLOSE_WAIT
+ [WinStore.App.exe]
+  TCP    192.168.1.4:58290      45.35.39.90:443        ESTABLISHED
+ [Discord.exe]
+  TCP    192.168.1.4:60017      23.62.3.141:443        ESTABLISHED
+ [Battle.net.exe]
+  TCP    192.168.1.4:61523      104.16.59.37:443       ESTABLISHED
+ [Discord.exe]
+  TCP    192.168.1.4:63672      23.45.228.133:443      CLOSE_WAIT
+ [Video.UI.exe]
+  TCP    192.168.1.4:63886      192.30.253.124:443     ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:64137      52.165.175.144:443     ESTABLISHED
+  WpnService
+ [svchost.exe]
+  TCP    192.168.1.4:64173      192.168.1.2:8008       ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:64175      74.125.197.188:5228    ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:64200      104.16.59.5:443        ESTABLISHED
+ [Discord.exe]
+  TCP    192.168.1.4:64247      151.101.66.167:443     ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:64249      35.164.200.248:443     ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:64336      151.101.54.167:443     ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:64623      52.165.170.112:443     ESTABLISHED
+  WpnService
+ [svchost.exe]
+  TCP    192.168.1.4:64918      162.254.192.108:443    ESTABLISHED
+ [Steam.exe]
+  TCP    192.168.1.4:65224      172.217.3.197:443      ESTABLISHED
+ [chrome.exe]
+  TCP    192.168.1.4:65340      13.32.254.28:443       CLOSE_WAIT
+ [Battle.net.exe]
+  TCP    192.168.1.4:65341      13.32.254.253:443      CLOSE_WAIT
+ [Battle.net.exe]
+  TCP    192.168.1.4:65415      24.105.29.76:443       CLOSE_WAIT
+ [Battle.net.exe]
+  TCP    192.168.1.4:65462      24.105.29.76:443       CLOSE_WAIT
+ [Agent.exe]
+  TCP    [::]:135               [::]:0                 LISTENING
+  RpcSs
+ [svchost.exe]
+  TCP    [::]:445               [::]:0                 LISTENING
+ Can not obtain ownership information
+  TCP    [::]:554               [::]:0                 LISTENING
+ [wmpnetwk.exe]
+  TCP    [::]:1801              [::]:0                 LISTENING
+ [mqsvc.exe]
+  TCP    [::]:2103              [::]:0                 LISTENING
+ [mqsvc.exe]
+  TCP    [::]:2105              [::]:0                 LISTENING
+ [mqsvc.exe]
+  TCP    [::]:2107              [::]:0                 LISTENING
+ [mqsvc.exe]
+  TCP    [::]:2179              [::]:0                 LISTENING
+ [vmms.exe]
+  TCP    [::]:2869              [::]:0                 LISTENING
+ Can not obtain ownership information
+  TCP    [::]:10243             [::]:0                 LISTENING
+ Can not obtain ownership information
+  TCP    [::]:49664             [::]:0                 LISTENING
+ Can not obtain ownership information
+  TCP    [::]:49665             [::]:0                 LISTENING
+  EventLog
+ [svchost.exe]
+  TCP    [::]:49666             [::]:0                 LISTENING
+  Schedule
+ [svchost.exe]
+  TCP    [::]:49667             [::]:0                 LISTENING
+  SessionEnv
+ [svchost.exe]
+  TCP    [::]:49669             [::]:0                 LISTENING
+ [spoolsv.exe]
+  TCP    [::]:49670             [::]:0                 LISTENING
+ [mqsvc.exe]
+  TCP    [::]:49690             [::]:0                 LISTENING
+ Can not obtain ownership information
+  TCP    [::]:49723             [::]:0                 LISTENING
+ [lsass.exe]
+  TCP    [::]:54235             [::]:0                 LISTENING
+ Can not obtain ownership information
+  TCP    [::]:54236             [::]:0                 LISTENING
+ Can not obtain ownership information
+  TCP    [::1]:58728            [::]:0                 LISTENING
+ [sqlservr.exe]
+  UDP    0.0.0.0:53             *:*                    
+  SharedAccess
+ [svchost.exe]
+  UDP    0.0.0.0:500            *:*                    
+  IKEEXT
+ [svchost.exe]
+  UDP    0.0.0.0:4500           *:*                    
+  IKEEXT
+ [svchost.exe]
+  UDP    0.0.0.0:5004           *:*                    
+ [wmpnetwk.exe]
+  UDP    0.0.0.0:5004           *:*                    
+ [wmpnetwk.exe]
+  UDP    0.0.0.0:5005           *:*                    
+ [wmpnetwk.exe]
+  UDP    0.0.0.0:5005           *:*                    
+ [wmpnetwk.exe]
+  UDP    0.0.0.0:5050           *:*                    
+  CDPSvc
+ [svchost.exe]
+  UDP    0.0.0.0:5353           *:*                    
+ [chrome.exe]
+  UDP    0.0.0.0:5353           *:*                    
+ [chrome.exe]
+  UDP    0.0.0.0:5353           *:*                    
+ [chrome.exe]
+  UDP    0.0.0.0:5353           *:*                    
+ [chrome.exe]
+  UDP    0.0.0.0:5353           *:*                    
+ [chrome.exe]
+  UDP    0.0.0.0:5353           *:*                    
+ [chrome.exe]
+  UDP    0.0.0.0:5353           *:*                    
+ [chrome.exe]
+  UDP    0.0.0.0:5353           *:*                    
+  Dnscache
+ [svchost.exe]
+  UDP    0.0.0.0:5355           *:*                    
+  Dnscache
+ [svchost.exe]
+  UDP    0.0.0.0:27036          *:*                    
+ [Steam.exe]
+  UDP    0.0.0.0:49563          *:*                    
+ [mDNSResponder.exe]
+  UDP    0.0.0.0:50945          *:*                    
+ [nvcontainer.exe]
+  UDP    0.0.0.0:51397          *:*                    
+ [chrome.exe]
+  UDP    0.0.0.0:53154          *:*                    
+ [chrome.exe]
+  UDP    0.0.0.0:54541          *:*                    
+ [Steam.exe]
+  UDP    0.0.0.0:54915          *:*                    
+ [LCore.exe]
+  UDP    0.0.0.0:56817          *:*                    
+ [Discord.exe]
+  UDP    0.0.0.0:65469          *:*                    
+  SharedAccess
+ [svchost.exe]
+  UDP    0.0.0.0:65470          *:*                    
+  SharedAccess
+ [svchost.exe]
+  UDP    10.0.75.1:137          *:*                    
+ Can not obtain ownership information
+  UDP    10.0.75.1:138          *:*                    
+ Can not obtain ownership information
+  UDP    10.0.75.1:1900         *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    10.0.75.1:2177         *:*                    
+  QWAVE
+ [svchost.exe]
+  UDP    10.0.75.1:5353         *:*                    
+ [mDNSResponder.exe]
+  UDP    10.0.75.1:5353         *:*                    
+ [nvcontainer.exe]
+  UDP    10.0.75.1:59252        *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    127.0.0.1:1900         *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    127.0.0.1:44301        *:*                    
+ [PnkBstrA.exe]
+  UDP    127.0.0.1:48201        *:*                    
+ [NVIDIA Web Helper.exe]
+  UDP    127.0.0.1:49565        *:*                    
+  iphlpsvc
+ [svchost.exe]
+  UDP    127.0.0.1:50943        *:*                    
+ [NVIDIA Web Helper.exe]
+  UDP    127.0.0.1:50944        *:*                    
+ [NVIDIA Web Helper.exe]
+  UDP    127.0.0.1:50947        *:*                    
+ [NVIDIA Web Helper.exe]
+  UDP    127.0.0.1:51995        *:*                    
+ [nvcontainer.exe]
+  UDP    127.0.0.1:51996        *:*                    
+ [nvcontainer.exe]
+  UDP    127.0.0.1:53948        *:*                    
+ [nvcontainer.exe]
+  UDP    127.0.0.1:57274        *:*                    
+ [NVIDIA Web Helper.exe]
+  UDP    127.0.0.1:57729        *:*                    
+ [nvcontainer.exe]
+  UDP    127.0.0.1:58691        *:*                    
+ [nvcontainer.exe]
+  UDP    127.0.0.1:59254        *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    127.0.0.1:65000        *:*                    
+ [nvcontainer.exe]
+  UDP    172.20.128.1:137       *:*                    
+ Can not obtain ownership information
+  UDP    172.20.128.1:138       *:*                    
+ Can not obtain ownership information
+  UDP    172.20.128.1:1900      *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    172.20.128.1:2177      *:*                    
+  QWAVE
+ [svchost.exe]
+  UDP    172.20.128.1:5353      *:*                    
+ [nvcontainer.exe]
+  UDP    172.20.128.1:5353      *:*                    
+ [mDNSResponder.exe]
+  UDP    172.20.128.1:59256     *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    172.22.22.1:67         *:*                    
+  SharedAccess
+ [svchost.exe]
+  UDP    172.22.22.1:68         *:*                    
+  SharedAccess
+ [svchost.exe]
+  UDP    172.22.22.1:1900       *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    172.22.22.1:2177       *:*                    
+  QWAVE
+ [svchost.exe]
+  UDP    172.22.22.1:5353       *:*                    
+ [nvcontainer.exe]
+  UDP    172.22.22.1:5353       *:*                    
+ [mDNSResponder.exe]
+  UDP    172.22.22.1:59255      *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    192.168.1.4:137        *:*                    
+ Can not obtain ownership information
+  UDP    192.168.1.4:138        *:*                    
+ Can not obtain ownership information
+  UDP    192.168.1.4:1900       *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    192.168.1.4:2177       *:*                    
+  QWAVE
+ [svchost.exe]
+  UDP    192.168.1.4:5353       *:*                    
+ [nvcontainer.exe]
+  UDP    192.168.1.4:5353       *:*                    
+ [mDNSResponder.exe]
+  UDP    192.168.1.4:59253      *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    [::]:500               *:*                    
+  IKEEXT
+ [svchost.exe]
+  UDP    [::]:4500              *:*                    
+  IKEEXT
+ [svchost.exe]
+  UDP    [::]:5004              *:*                    
+ [wmpnetwk.exe]
+  UDP    [::]:5005              *:*                    
+ [wmpnetwk.exe]
+  UDP    [::]:5353              *:*                    
+ [chrome.exe]
+  UDP    [::]:5353              *:*                    
+ [chrome.exe]
+  UDP    [::]:5353              *:*                    
+ [chrome.exe]
+  UDP    [::]:5353              *:*                    
+  Dnscache
+ [svchost.exe]
+  UDP    [::]:5355              *:*                    
+  Dnscache
+ [svchost.exe]
+  UDP    [::]:27036             *:*                    
+ [Steam.exe]
+  UDP    [::]:49564             *:*                    
+ [mDNSResponder.exe]
+  UDP    [::]:50946             *:*                    
+ [nvcontainer.exe]
+  UDP    [::]:54915             *:*                    
+ [LCore.exe]
+  UDP    [::]:65471             *:*                    
+  SharedAccess
+ [svchost.exe]
+  UDP    [::1]:1900             *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    [::1]:5353             *:*                    
+ [mDNSResponder.exe]
+  UDP    [::1]:5353             *:*                    
+ [nvcontainer.exe]
+  UDP    [::1]:59249            *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    [fe80::6dd1:7dd:7449:fed2%16]:1900  *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    [fe80::6dd1:7dd:7449:fed2%16]:2177  *:*                    
+  QWAVE
+ [svchost.exe]
+  UDP    [fe80::6dd1:7dd:7449:fed2%16]:59248  *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    [fe80::74fa:9032:ba8a:45d4%21]:1900  *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    [fe80::74fa:9032:ba8a:45d4%21]:2177  *:*                    
+  QWAVE
+ [svchost.exe]
+  UDP    [fe80::74fa:9032:ba8a:45d4%21]:59251  *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    [fe80::cc50:3478:743:4e62%11]:1900  *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    [fe80::cc50:3478:743:4e62%11]:2177  *:*                    
+  QWAVE
+ [svchost.exe]
+  UDP    [fe80::cc50:3478:743:4e62%11]:59250  *:*                    
+  SSDPSRV
+ [svchost.exe]
