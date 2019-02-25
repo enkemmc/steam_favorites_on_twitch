@@ -1,135 +1,74 @@
 require('dotenv').config()
-const puppeteer = require('puppeteer')
+const {TWITCH_API_KEY} = process.env
 const fetch = require('node-fetch')
 const fs = require('fs')
+const urlprefix = 'https://store.steampowered.com/api/appdetails/?appids='
 
-const {TWITCH_API_KEY} = process.env
-const profilepath = 'http://store.steampowered.com/wishlist/profiles/76561197993032511'
+function getUrl(name){
+    return encodeURI(`https://api.twitch.tv/kraken/search/games?query=${name}&type=suggest`)
+}
 
-class TwitchScraper {
-    async getGameUrls(name){
-        const twitchurl = 'https://www.twitch.tv/'
-        console.log('gettingfile')
-        console.log('------------')
-        const browser = await puppeteer.launch({
-            // headless: false
-        })
-        const page = await browser.newPage()
-        await page.goto(twitchurl)
-        console.log(`Loading ${twitchurl}`)
-        console.log('--------')
-
-        const selector = 'button[aria-label="Search"]'
-        await page.waitForSelector(selector)
-        const searchBoxRes = await page.$$(selector)
-        const searchBox = searchBoxRes[0]
-        
-        await searchBox.click()
-        await page.keyboard.type(name)
-        // await searchBox.type(name)
-        console.log('typing in ', name)
-        
-        // wait for dropdown
-        const dropdownselector = '.search-result-section__listing-wrapper'
-        await page.waitForSelector(dropdownselector)
-        console.log('waiting for search results')
-        const searchresults = await page.$$(dropdownselector)
-
-        const firstgameselector = 'a.tw-interactive'
-        let gameHrefs = []
-        for (let result of searchresults){  
-            const game = await result.$(firstgameselector)
-            const href = await page.evaluate(e => e["href"], game)
-            gameHrefs.push(href)
-        }
-        await browser.close()
-        return gameHrefs
-    }
-
-    // profilepath = steam wishlist
-    // eg 'https://store.steampowered.com/wishlist/profiles/76561197993032511'
-    async getFavoriteTitles(profilepath) {
-        console.log('gettingfile')
-        console.log('------------')
-        const browser = await puppeteer.launch({
-            
-        })
-        const page = await browser.newPage()
-        await page.goto(profilepath)
-        console.log(`Loading ${profilepath}`)
-        console.log('--------')
-        const selector = '.title'
-        await page.waitForSelector(selector)
-        const elements = await page.$$(selector)
-        let titles = []
-
-        for (let element of elements){
-            const html = await page.evaluate(a => a.innerHTML, element)
-            titles.push(html.replace(/[\u{0080}-\u{FFFF}]/gu,"").trim())
-        }
-        
-        await browser.close()
-        return titles
-    }
-
-    async getIdFromName(name){
-        const myurl = `https://api.twitch.tv/helix/games?name=${name}`
-        return await fetch(myurl, {
-            headers: {
-                'Client-ID': TWITCH_API_KEY
-            }
-        }).then(res => res.json()).then(json => json.data[0].id)
-
-        //https://api.twitch.tv/helix/streams?game_id=488564
-    }
-
-    async getStreamsAndViewers(id){
-        const myurl = `https://api.twitch.tv/helix/streams?game_id=${id}`
-        const viewersArr = await fetch(myurl, {
-            headers: {
-                'Client-ID': TWITCH_API_KEY
-            }
-        }).then(res => res.json()).then(json => json.data)
-        return viewersArr.map(viewerObj => {
-            const thumbnail = viewerObj['thumbnail_url'].replace('{width}', 320).replace('{height}', 180)
-
-            return {
-                url: `https://www.twitch.tv/${viewerObj.user_name}`,
-                viewers: viewerObj['viewer_count'],
-                thumbnail,
-                title: viewerObj.title
-            }
-        })
+const settings = {
+    headers: {
+        'Client-ID': TWITCH_API_KEY
     }
 }
 
-async function getStreams(url){
-    const scraper = new TwitchScraper()
-    const gameNames = await scraper.getFavoriteTitles(url)
-    let friendlyGameNames = []
-    const twitchIdsPromises = await gameNames.map(async name => {
-        const urls = await scraper.getGameUrls(name)
-        if (urls[0].includes('/game/')){
-            const gamename = urls[0].split('/game/')[1]
-            friendlyGameNames.push(name)
-            return await scraper.getIdFromName(gamename)
-        } else {
-            return
-        }
+async function getStreams(appid){
+    const paturl = 'https://store.steampowered.com/wishlist/profiles/' + appid
+    const html = await fetch(paturl).then(res => res.text())
+    const regex = /(?<=var g_rgWishlistData = )(\[.+\])/g    
+    const favoritesJson = JSON.parse(html.match(regex))    
+    const gamesAndIdsArrProms = favoritesJson.map(async favorite => {        
+        const steamUrl = urlprefix + favorite.appid
+        const steamJson = await fetch(steamUrl).then(res => res.json())
+        const {name} = steamJson[favorite.appid].data
+        const twitchUrl = getUrl(name)
+        // console.log(twitchUrl)
+        const twitchJson = await fetch(twitchUrl, settings).then(res => res.json())
+        return await getGamesAndIds(twitchJson, name)
     })
-    const twitchIdsArr = await Promise.all(twitchIdsPromises)
-    // console.log(twitchIdsArr)
-    const streamUrlAndViewersPromises = twitchIdsArr.map(gameName => {
-        return scraper.getStreamsAndViewers(gameName)
-    })
-    const results = await Promise.all(streamUrlAndViewersPromises)
-    const mappedResults = friendlyGameNames.map((name, index)=> {
+
+    const gamesAndIdsArr = await Promise.all(gamesAndIdsArrProms)
+    // fs.writeFileSync('./data.json', JSON.stringify(gamesAndIdsArr, null, 2))
+    // console.log(gamesAndIdsArr)
+    return gamesAndIdsArr
+}
+
+async function getGamesAndIds(obj, steamName){
+    const games = obj["games"][0]
+    // console.log(Object.keys(obj))
+    if (!games){
+        // console.log(obj)
         return {
-            name,
-            streams: results[index]
+            name: steamName,
+            streams: []
+        }
+    }
+    // console.log(obj)
+    const {_id, name} = games
+    return {
+        name,
+        streams: await getStreamsAndViewers(_id)
+    }
+}
+
+async function getStreamsAndViewers(id){
+    const myurl = `https://api.twitch.tv/helix/streams?game_id=${id}`
+    const viewersArr = await fetch(myurl, settings).then(res => res.json()).then(json => json.data)
+    return viewersArr.map(viewerObj => {
+        const thumbnail = viewerObj['thumbnail_url'].replace('{width}', 320).replace('{height}', 180)
+
+        return {
+            url: `https://www.twitch.tv/${viewerObj.user_name}`,
+            viewers: viewerObj['viewer_count'],
+            thumbnail,
+            title: viewerObj.title
         }
     })
-    return mappedResults
 }
 
 module.exports = {getStreams}
+
+// fetch('https://api.twitch.tv/kraken/search/games?query=Metal%20Wolf%20Chaos%20XD&type=suggest', args).then(res => res.json()).then(json => console.log(json))
+

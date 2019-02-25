@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Form, Button, Container, Card, CardGroup, CardColumns, Row, Col, CardDeck} from 'react-bootstrap'
-import logo from './logo.svg';
+import {Form, Button, Container, Card} from 'react-bootstrap'
+import { CardDeckLayout} from './CustomCards'
 import './App.css';
 
 
@@ -9,7 +9,7 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      value: '',
+      value: 'https://store.steampowered.com/wishlist/profiles/',
       games: []
     }
     this.handleChange = this.handleChange.bind(this)
@@ -19,14 +19,24 @@ class App extends Component {
 
   handleSubmit = async e => {
     e.preventDefault()
+    if (!this.state.value.includes('https://store.steampowered.com/wishlist/profiles/')){
+      alert('Check URL format.')
+      return
+    }
     const profileid = this.state.value.split('/profiles/')[1].replace('/', '')
-    const serverpath = 'http://73.254.14.184:8080/'
-    const json = await fetch(serverpath + `${profileid}`).then(res => res.json())
-    this.setState({games: json})
+    const serverpath = '/api/'
+    // console.log('fetchin:', serverpath + profileid)
+    try {
+      const json = await fetch(serverpath + profileid).then(res => res.json())
+      this.setState({games: json})
+    } catch (e){
+      alert('Make sure steam profile is set to public.  Test the url in a Chrome incognito browser to confirm visibility.')
+    }
+    
   }
 
+  //dummy data
   _handleSubmit = e => {
-    console.log('clicked')
     e.preventDefault()
     const fakejson = [
       {
@@ -55,7 +65,7 @@ class App extends Component {
   }
 
   render() {
-    const gameNames = Object.keys(this.state.games)
+    
     return (
       <div className="App">
       <Container>
@@ -72,43 +82,22 @@ class App extends Component {
           </Button>
         </Form>
       </Container>
-      {(
-        this.state.games.map((game, index) => {
+      {(this.state.games) ? (
+        this.state.games.map((game) => {  
          return (
-           <Container>
-        <CardDeck key={index}>          
-            {game.streams.map((stream, index) => {
-              return (
-                <TwitchCard props={stream} key={game + index} />
-              )
-            })}
-        </CardDeck>
-        </Container>
-          )
+          (game.streams.length > 0) ? 
+          <Container key={game.name}>
+            <Card>
+            <Card.Header as="h2">{game.name}</Card.Header>
+            </Card>
+              <CardDeckLayout maxRowLength={4} game={game}/>
+          </Container>
+          :null)
         })
-      )}
+      ) : null}
       </div>
     )
   }
-}
-
-function TwitchCard({props}){
-  const {url, viewers, thumbnail, title} = props
-  console.log(props)
-
-    return (
-      
-      <Card style={{ width: '18rem' }} key={title} onClick={() => window.location=url}>
-        <Card.Img variant="top" src={thumbnail}/>
-        <Card.Body>
-          <Card.Title>{title}</Card.Title>
-          <Card.Text>
-            Viewers - {viewers}
-          </Card.Text>
-        </Card.Body>
-      </Card>
-      
-    )
 }
 
 export default App;
