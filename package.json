@@ -2,7 +2,6 @@
   "name": "steamfavorites",
   "version": "1.0.0",
   "description": "This project displays streamers who are streaming games on a given steam user's wishlist.",
-  "main": "app.js",
   "homepage": "https://enkemmc.github.io/steam_favorites_on_twitch",
   "dependencies": {
     "cors": "^2.8.5",
