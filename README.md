@@ -2,3 +2,7 @@ Simple React app that takes a user's public Steam wishlist and displys any live 
 
 Input Example: 
 https://store.steampowered.com/wishlist/profiles/76561197971155323/
+
+npm install
+npm build
+node app
