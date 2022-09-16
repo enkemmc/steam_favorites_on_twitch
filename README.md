@@ -6,3 +6,15 @@ https://store.steampowered.com/wishlist/profiles/76561197971155323/
 npm install
 npm build
 node app
+
+
+expected folder structure:
+root
+    build
+    node_modules
+    public
+    server
+        server.js
+    src 
+    package.json
+    .env
