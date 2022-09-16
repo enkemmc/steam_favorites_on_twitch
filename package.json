@@ -1,8 +1,9 @@
 {
-  "name": "awsapp",
+  "name": "steamfavorites",
   "version": "1.0.0",
   "description": "This project displays streamers who are streaming games on a given steam user's wishlist.",
   "main": "app.js",
+  "homepage": "https://enkemmc.github.io/steam_favorites_on_twitch",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
@@ -18,7 +19,8 @@
     "start-server": "nodemon server/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "",
@@ -29,5 +31,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:3005"
+  "proxy": "http://localhost:3005",
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  }
 }
