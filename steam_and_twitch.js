@@ -1,32 +1,56 @@
 require('dotenv').config()
-const {TWITCH_API_KEY} = process.env
+const { CLIENT_ID, BEARER_TOKEN } = process.env
 const fetch = require('node-fetch')
-const fs = require('fs')
+
 const urlprefix = 'https://store.steampowered.com/api/appdetails/?appids='
-
-function getUrl(name){
-    return encodeURI(`https://api.twitch.tv/kraken/search/games?query=${name}&type=suggest`)
-}
-
 const settings = {
     headers: {
-        'Client-ID': TWITCH_API_KEY
+        'Client-ID': CLIENT_ID,
+        'Authorization': `Bearer ${BEARER_TOKEN}`
+    }
+}
+function getUrl(id) {
+    return encodeURI(`https://api.twitch.tv/helix/streams?game_id=${id}`)
+}
+
+async function getTwitchId(name) {
+    const uri = encodeURI(`https://api.twitch.tv/helix/games?name=${name}`)
+    const json = await fetch(uri, settings).then(res => res.json())
+    if (json.data) {
+        if (json.data.length > 0) {
+            return json.data[0].id
+        }
     }
 }
 
-async function getStreams(appid){
+
+
+function cleanName(name) {
+    // remove r's and tm's
+    return name.replace(/[\u{0080}-\u{FFFF}]/gu, "")
+}
+
+async function getStreams(appid) {
     const paturl = 'https://store.steampowered.com/wishlist/profiles/' + appid
     const html = await fetch(paturl).then(res => res.text())
-    const regex = /(?<=var g_rgWishlistData = )(\[.+\])/g    
-    const favoritesJson = JSON.parse(html.match(regex))    
-    const gamesAndIdsArrProms = favoritesJson.map(async favorite => {        
+    const regex = /(?<=var g_rgWishlistData = )(\[.+\])/g
+    const favoritesJson = JSON.parse(html.match(regex))
+    const gamesAndIdsArrProms = favoritesJson.map(async favorite => {
         const steamUrl = urlprefix + favorite.appid
         const steamJson = await fetch(steamUrl).then(res => res.json())
-        const {name} = steamJson[favorite.appid].data
-        const twitchUrl = getUrl(name)
-        // console.log(twitchUrl)
-        const twitchJson = await fetch(twitchUrl, settings).then(res => res.json())
-        return await getGamesAndIds(twitchJson, name)
+        const { name } = steamJson[favorite.appid].data
+        const cleanedName = cleanName(name)
+        const twitchId = await getTwitchId(cleanedName)
+        if (twitchId) {
+            const twitchUrl = getUrl(twitchId)
+            const twitchJson = await fetch(twitchUrl, settings).then(res => res.json())
+            return await getGamesAndIds(twitchJson, name)
+        } else {
+            return {
+                name,
+                streams: []
+            }
+        }
     })
 
     const gamesAndIdsArr = await Promise.all(gamesAndIdsArrProms)
@@ -35,27 +59,26 @@ async function getStreams(appid){
     return gamesAndIdsArr
 }
 
-async function getGamesAndIds(obj, steamName){
-    const games = obj["games"][0]
-    // console.log(Object.keys(obj))
-    if (!games){
-        // console.log(obj)
+async function getGamesAndIds(obj, steamName) {
+
+    let viewers
+    if (obj["data"]) {
+        viewers = obj["data"]
+    }
+
+    if (!viewers) {
         return {
             name: steamName,
             streams: []
         }
     }
-    // console.log(obj)
-    const {_id, name} = games
     return {
-        name,
-        streams: await getStreamsAndViewers(_id)
+        name: steamName,
+        streams: await getStreamsAndViewers(viewers)
     }
 }
 
-async function getStreamsAndViewers(id){
-    const myurl = `https://api.twitch.tv/helix/streams?game_id=${id}`
-    const viewersArr = await fetch(myurl, settings).then(res => res.json()).then(json => json.data)
+async function getStreamsAndViewers(viewersArr) {
     return viewersArr.map(viewerObj => {
         const thumbnail = viewerObj['thumbnail_url'].replace('{width}', 320).replace('{height}', 180)
 
@@ -68,7 +91,4 @@ async function getStreamsAndViewers(id){
     })
 }
 
-module.exports = {getStreams}
-
-// fetch('https://api.twitch.tv/kraken/search/games?query=Metal%20Wolf%20Chaos%20XD&type=suggest', args).then(res => res.json()).then(json => console.log(json))
-
+module.exports = { getStreams }
