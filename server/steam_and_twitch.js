@@ -9,7 +9,7 @@ const settings = {
         'Authorization': `Bearer ${BEARER_TOKEN}`
     }
 }
-function getUrl(id) {
+function getStreamsUrl(id) {
     return encodeURI(`https://api.twitch.tv/helix/streams?game_id=${id}`)
 }
 
@@ -25,26 +25,52 @@ async function getTwitchId(name) {
 
 
 
+// remove r's and tm's
 function cleanName(name) {
-    // remove r's and tm's
     return name.replace(/[\u{0080}-\u{FFFF}]/gu, "")
 }
 
-async function getStreams(appid) {
-    const paturl = 'https://store.steampowered.com/wishlist/profiles/' + appid
-    const html = await fetch(paturl).then(res => res.text())
+// get profile url
+// get html from url
+// extract array of objects containing appids of favorites from url using regex
+// use these appids to make api calls to steam's appid api 
+// extract the name of the game from the response
+// remove non-ascii chars from game name
+// request the twitch game_id from twitch's api using the steam game name
+// if we get a response:
+//    request streams of this game from twitch's api
+//    return obj with { name, streams[..] }
+// if we don't get a response:
+//    return obj with { name, streams[] }
+
+async function getStreams(steamUserName) {
+    const userNameUrl = `https://steamcommunity.com/id/${steamUserName}/`
+    const userNameHtml = await fetch(userNameUrl).then(res => res.text())
+    const profileRegex = /(?<=g_rgProfileData = )(.+)(?=;)/g
+    const profileObj = userNameHtml.match(profileRegex)
+    if (!profileObj) {
+        console.log(`couldnt find a profile at ${userNameUrl}`)
+        return []
+    }
+    const profileId = JSON.parse(profileObj[0]).steamid
+    const profileIdUrl = 'https://store.steampowered.com/wishlist/profiles/' + profileId
+    const html = await fetch(profileIdUrl).then(res => res.text())
     const regex = /(?<=var g_rgWishlistData = )(\[.+\])/g
-    const favoritesJson = JSON.parse(html.match(regex))
-    const gamesAndIdsArrProms = favoritesJson.map(async favorite => {
+    const favoritesArr = JSON.parse(html.match(regex))
+    if (!favoritesArr) {
+        console.log(`couldnt find a match at ${profileIdUrl}`)
+        return []
+    }
+    const gamesAndIdsArrProms = favoritesArr.map(async favorite => {
         const steamUrl = urlprefix + favorite.appid
         const steamJson = await fetch(steamUrl).then(res => res.json())
         const { name } = steamJson[favorite.appid].data
         const cleanedName = cleanName(name)
         const twitchId = await getTwitchId(cleanedName)
         if (twitchId) {
-            const twitchUrl = getUrl(twitchId)
-            const twitchJson = await fetch(twitchUrl, settings).then(res => res.json())
-            return await getGamesAndIds(twitchJson, name)
+            const twitchUrl = getStreamsUrl(twitchId)
+            const res = await fetch(twitchUrl, settings).then(res => res.json())
+            return await getStreamers(res, name)
         } else {
             return {
                 name,
@@ -54,19 +80,17 @@ async function getStreams(appid) {
     })
 
     const gamesAndIdsArr = await Promise.all(gamesAndIdsArrProms)
-    // fs.writeFileSync('./data.json', JSON.stringify(gamesAndIdsArr, null, 2))
-    // console.log(gamesAndIdsArr)
     return gamesAndIdsArr
 }
 
-async function getGamesAndIds(obj, steamName) {
+async function getStreamers(res, steamName) {
 
-    let viewers
-    if (obj["data"]) {
-        viewers = obj["data"]
+    let streamerArr
+    if (res["data"]) {
+        streamerArr = res["data"]
     }
 
-    if (!viewers) {
+    if (!streamerArr) {
         return {
             name: steamName,
             streams: []
@@ -74,19 +98,19 @@ async function getGamesAndIds(obj, steamName) {
     }
     return {
         name: steamName,
-        streams: await getStreamsAndViewers(viewers)
+        streams: await getStreamsAndViewers(streamerArr)
     }
 }
 
-async function getStreamsAndViewers(viewersArr) {
-    return viewersArr.map(viewerObj => {
-        const thumbnail = viewerObj['thumbnail_url'].replace('{width}', 320).replace('{height}', 180)
+async function getStreamsAndViewers(streamerArr) {
+    return streamerArr.map(streamerObj => {
+        const thumbnail = streamerObj['thumbnail_url'].replace('{width}', 320).replace('{height}', 180)
 
         return {
-            url: `https://www.twitch.tv/${viewerObj.user_name}`,
-            viewers: viewerObj['viewer_count'],
+            url: `https://www.twitch.tv/${streamerObj.user_name}`,
+            viewers: streamerObj['viewer_count'],
             thumbnail,
-            title: viewerObj.title
+            title: streamerObj.title
         }
     })
 }

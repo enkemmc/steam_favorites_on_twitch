@@ -3,13 +3,15 @@ import { Form, Button, Container, Card } from 'react-bootstrap'
 import { CardDeckLayout } from './CustomCards'
 import './App.css';
 
+const placeholderSteamId = 'https://steamcommunity.com/id/avaray/'
+const { REACT_APP_SERVER_ENDPOINT, NODE_ENV } = process.env
 
 class App extends Component {
 
   constructor() {
     super()
     this.state = {
-      value: 'https://store.steampowered.com/wishlist/profiles/76561197993032511',
+      value: placeholderSteamId,
       games: []
     }
     this.handleChange = this.handleChange.bind(this)
@@ -19,12 +21,14 @@ class App extends Component {
 
   handleSubmit = async e => {
     e.preventDefault()
-    if (!this.state.value.includes('https://store.steampowered.com/wishlist/profiles')) {
+    if (!this.state.value.includes('https://steamcommunity.com/id/')) {
       alert('Check URL format.')
       return
     }
-    const profileid = this.state.value.split('/profiles/')[1].replace('/', '')
-    const serverpath = '/api/'
+    const profileid = this.state.value.split('/id/')[1].replace('/', '')
+    const serverpath = REACT_APP_SERVER_ENDPOINT || '/api/'
+    console.log(NODE_ENV)
+    console.log(serverpath)
     // console.log('fetchin:', serverpath + profileid)
     try {
       const json = await fetch(serverpath + profileid).then(res => res.json())
@@ -67,19 +71,18 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <div className="App">
         <Container>
           <Form onSubmit={e => this.handleSubmit(e)}>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Steam Profile</Form.Label>
-              <Form.Control type="text" placeholder="https://store.steampowered.com/wishlist/profiles/76561197993032511" name="profileUrl" value={this.state.value} onChange={this.handleChange} />
+              <Form.Control type="text" placeholder={placeholderSteamId} name="profileUrl" value={this.state.value} onChange={this.handleChange} />
               <Form.Text className="text-muted">
                 Make sure it's set to public.
               </Form.Text>
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={() => this.handleSubmit}>
+            <Button variant="primary" type="submit" onClick={e => this.handleSubmit(e)}>
               Submit
             </Button>
           </Form>

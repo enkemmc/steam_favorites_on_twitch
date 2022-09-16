@@ -13,10 +13,10 @@ const port = process.env.PORT || 3005
 
 app.listen(port, () => console.log(`listening on ${port}`))
 
-app.get('/api/:profileNumber', async (req, res) => {
-    const { profileNumber } = req.params
+app.get('/api/:steamUserName', async (req, res) => {
+    const { steamUserName } = req.params
     try {
-        const data = await getInfo(profileNumber)
+        const data = await getStreams(steamUserName)
         res.json(data)
     } catch (e) {
         console.log(e)
@@ -24,11 +24,6 @@ app.get('/api/:profileNumber', async (req, res) => {
     }
 })
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
     res.sendFile('index.html')
-    //res.sendFile(path.resolve('./build/index.html'))
 })
-
-async function getInfo(profileNumber) {
-    return await getStreams(profileNumber)
-}
