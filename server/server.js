@@ -1,8 +1,11 @@
 require('dotenv').config()
 const express = require('express')
-const cors = require('cors');
+const cors = require('cors')
+const fs = require('fs')
+const https = require('https')
 const app = express()
-const path = require('path')
+
+
 const { getStreams } = require('./steam_and_twitch')
 
 app.use(cors())
@@ -10,8 +13,14 @@ app.use(express.static('./build'))
 app.options('*', cors())
 
 const port = process.env.PORT || 3005
-
-app.listen(port, () => console.log(`listening on ${port}`))
+https
+    .createServer(
+        {
+            key: fs.readFileSync("./server/ssl/key.pem"),
+            cert: fs.readFileSync("./server/ssl/cert.pem"),
+        },
+        app
+    ).listen(port, () => console.log(`listening on ${port}`))
 
 app.get('/api/:steamUserName', async (req, res) => {
     const { steamUserName } = req.params

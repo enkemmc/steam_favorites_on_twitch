@@ -18,3 +18,7 @@ root
     src 
     package.json
     .env
+
+
+helpful content:
+  hosting & portforwarding w/ wsl2 - https://www.youtube.com/watch?v=ACjlvzw4bVE&ab_channel=JohnCapobianco
