@@ -27,13 +27,10 @@ class App extends Component {
     }
     const profileid = this.state.value.split('/id/')[1].replace('/', '')
     const serverpath = REACT_APP_SERVER_ENDPOINT || '/api/'
-    console.log(NODE_ENV)
-    console.log(serverpath)
-    // console.log('fetchin:', serverpath + profileid)
     try {
-      const json = await fetch(serverpath + profileid).then(res => res.json())
-      console.log(`received:`)
-      console.log(`${JSON.stringify(json, null, 3)}`)
+      const json = await fetch(serverpath + profileid, {
+
+      }).then(res => res.json())
       this.setState({ games: json })
     } catch (e) {
       alert('Make sure steam profile is set to public.  Test the url in a Chrome incognito browser to confirm visibility.')

@@ -16,20 +16,35 @@ const port = process.env.PORT || 3005
 https
     .createServer(
         {
-            key: fs.readFileSync("./server/ssl/key.pem"),
-            cert: fs.readFileSync("./server/ssl/cert.pem"),
+            key: fs.readFileSync("./server/certs/privkey1.pem"),
+            cert: fs.readFileSync("./server/certs/cert1.pem"),
         },
         app
     ).listen(port, () => console.log(`listening on ${port}`))
+// app.listen(port, () => console.log(`listening on port: ${port}`))
+
+app.get('/hello/', (req, res) => {
+    res.send('working')
+})
 
 app.get('/api/:steamUserName', async (req, res) => {
     const { steamUserName } = req.params
     try {
-        const data = await getStreams(steamUserName)
-        res.json(data)
+        const result = await getStreams(steamUserName)
+        console.log(result)
+        if (result.error) {
+            res.json({
+                error: result.error
+            })
+            // handle error
+        } else {
+            res.json({
+                data: result.data
+            })
+        }
     } catch (e) {
         console.log(e)
-        res.json({})
+        res.status(500)
     }
 })
 

@@ -19,6 +19,7 @@ goodstuff.zip
 .env.test.local
 .env.production.local
 .env
+server/certs
 
 npm-debug.log*
 yarn-debug.log*

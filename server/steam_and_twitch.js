@@ -43,14 +43,25 @@ function cleanName(name) {
 // if we don't get a response:
 //    return obj with { name, streams[] }
 
+// [{ name, stream[] }]
+// { error, data: [{ name, stream[] }]}
 async function getStreams(steamUserName) {
+    let result = {
+        error: null,
+        data: {
+            name: null,
+            streams: []
+        }
+    }
     const userNameUrl = `https://steamcommunity.com/id/${steamUserName}/`
     const userNameHtml = await fetch(userNameUrl).then(res => res.text())
     const profileRegex = /(?<=g_rgProfileData = )(.+)(?=;)/g
     const profileObj = userNameHtml.match(profileRegex)
     if (!profileObj) {
         console.log(`couldnt find a profile at ${userNameUrl}`)
-        return []
+        return {
+            error: 'INVALID_PROFILE'
+        }
     }
     const profileId = JSON.parse(profileObj[0]).steamid
     const profileIdUrl = 'https://store.steampowered.com/wishlist/profiles/' + profileId
@@ -59,11 +70,16 @@ async function getStreams(steamUserName) {
     const favoritesArr = JSON.parse(html.match(regex))
     if (!favoritesArr) {
         console.log(`couldnt find a match at ${profileIdUrl}`)
-        return []
+        return {
+            error: 'PROFILE_NOT_PUBLIC'
+        }
     }
     const gamesAndIdsArrProms = favoritesArr.map(async favorite => {
         const steamUrl = urlprefix + favorite.appid
         const steamJson = await fetch(steamUrl).then(res => res.json())
+        if (!steamJson[favorite.appid]) {
+            return
+        }
         const { name } = steamJson[favorite.appid].data
         const cleanedName = cleanName(name)
         const twitchId = await getTwitchId(cleanedName)
@@ -80,7 +96,9 @@ async function getStreams(steamUserName) {
     })
 
     const gamesAndIdsArr = await Promise.all(gamesAndIdsArrProms)
-    return gamesAndIdsArr
+    return {
+        data: gamesAndIdsArr
+    }
 }
 
 async function getStreamers(res, steamName) {
