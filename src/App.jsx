@@ -28,12 +28,24 @@ class App extends Component {
     const profileid = this.state.value.split('/id/')[1].replace('/', '')
     const serverpath = REACT_APP_SERVER_ENDPOINT || '/api/'
     try {
-      const json = await fetch(serverpath + profileid, {
-
-      }).then(res => res.json())
-      this.setState({ games: json })
+      const json = await fetch(serverpath + profileid).then(res => res.json())
+      if (json.error) {
+        switch (json.error) {
+          case 'INVALID_PROFILE':
+            alert(`Can't find this profile on steam.`)
+            break
+          case 'PROFILE_NOT_PUBLIC':
+            alert(`Profile isn't set to public.`)
+            break
+          default:
+            alert('Server sent an incomprehensible error.')
+            break
+        }
+      } else {
+        this.setState({ games: json.data })
+      }
     } catch (e) {
-      alert('Make sure steam profile is set to public.  Test the url in a Chrome incognito browser to confirm visibility.')
+      alert('Error accessing the server.')
     }
 
   }
