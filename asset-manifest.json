@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/steam_favorites_on_twitch/static/css/main.9dd13232.css",
-    "main.js": "/steam_favorites_on_twitch/static/js/main.7db5c5ea.js",
+    "main.js": "/steam_favorites_on_twitch/static/js/main.44b627e9.js",
     "index.html": "/steam_favorites_on_twitch/index.html",
     "main.9dd13232.css.map": "/steam_favorites_on_twitch/static/css/main.9dd13232.css.map",
-    "main.7db5c5ea.js.map": "/steam_favorites_on_twitch/static/js/main.7db5c5ea.js.map"
+    "main.44b627e9.js.map": "/steam_favorites_on_twitch/static/js/main.44b627e9.js.map"
   },
   "entrypoints": [
     "static/css/main.9dd13232.css",
-    "static/js/main.7db5c5ea.js"
+    "static/js/main.44b627e9.js"
   ]
 }
