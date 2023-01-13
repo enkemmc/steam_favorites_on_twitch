@@ -85,7 +85,7 @@ async function getStreams(steamUserName) {
         const cleanedName = cleanName(name)
         const twitchId = await getTwitchId(cleanedName)
         if (twitchId) {
-            const apiResponse = getStreamsById(twitchId)
+            const apiResponse = await getStreamsById(twitchId)
             return await getStreamers(apiResponse, name)
         } else {
             return {
