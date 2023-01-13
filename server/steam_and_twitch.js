@@ -9,8 +9,9 @@ const settings = {
         'Authorization': `Bearer ${BEARER_TOKEN}`
     }
 }
-function getStreamsUrl(id) {
-    return encodeURI(`https://api.twitch.tv/helix/streams?game_id=${id}`)
+async function getStreamsById(id) {
+    const url = encodeURI(`https://api.twitch.tv/helix/streams?game_id=${id}`)
+    return await fetch(url, settings).then(res => res.json())
 }
 
 async function getTwitchId(name) {
@@ -84,9 +85,8 @@ async function getStreams(steamUserName) {
         const cleanedName = cleanName(name)
         const twitchId = await getTwitchId(cleanedName)
         if (twitchId) {
-            const twitchUrl = getStreamsUrl(twitchId)
-            const res = await fetch(twitchUrl, settings).then(res => res.json())
-            return await getStreamers(res, name)
+            const apiResponse = getStreamsById(twitchId)
+            return await getStreamers(apiResponse, name)
         } else {
             return {
                 name,
@@ -133,4 +133,4 @@ async function getStreamsAndViewers(streamerArr) {
     })
 }
 
-module.exports = { getStreams }
+module.exports = { getStreams, getTwitchId, getStreamsById }

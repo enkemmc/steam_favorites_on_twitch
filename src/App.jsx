@@ -3,8 +3,8 @@ import { Form, Button, Container, Card } from 'react-bootstrap'
 import { CardDeckLayout } from './CustomCards'
 import './App.css';
 
-const placeholderSteamId = 'https://steamcommunity.com/id/avaray/'
-const { REACT_APP_SERVER_ENDPOINT, NODE_ENV } = process.env
+const placeholderSteamId = 'https://steamcommunity.com/id/wishlist_example/'
+const { REACT_APP_SERVER_ENDPOINT, REACT_APP_SERVER_ENDPOINT_DEV, NODE_ENV } = process.env
 
 class App extends Component {
 
@@ -12,11 +12,16 @@ class App extends Component {
     super()
     this.state = {
       value: placeholderSteamId,
-      games: []
+      games: [],
+      endpoint: NODE_ENV === 'development' ? REACT_APP_SERVER_ENDPOINT_DEV : REACT_APP_SERVER_ENDPOINT
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this._handleSubmit = this._handleSubmit.bind(this)
+    console.log(`mode is: ${NODE_ENV}`)
+    for (const [k,v] of Object.entries(process.env)) {
+      console.log(k, v)
+    }
   }
 
   handleSubmit = async e => {
@@ -26,10 +31,10 @@ class App extends Component {
       return
     }
     const profileid = this.state.value.split('/id/')[1].replace('/', '')
-    const serverpath = REACT_APP_SERVER_ENDPOINT || '/api/'
     try {
-      const json = await fetch(serverpath + profileid).then(res => res.json())
+      const json = await fetch(this.state.endpoint + profileid).then(res => res.json())
       if (json.error) {
+        console.log('there was an error')
         switch (json.error) {
           case 'INVALID_PROFILE':
             alert(`Can't find this profile on steam.`)
@@ -42,6 +47,8 @@ class App extends Component {
             break
         }
       } else {
+        console.log(`setting state`)
+        console.log(json)
         this.setState({ games: json.data })
       }
     } catch (e) {
