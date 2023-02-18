@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { Form, Button, Container, Card } from 'react-bootstrap'
-import { CardDeckLayout } from './CustomCards'
+import { Form, Button, Container } from 'react-bootstrap'
 import './App.css';
+import Accordion from 'react-bootstrap/Accordion'
+import Card from 'react-bootstrap/Card'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
+import Spinner from 'react-bootstrap/Spinner'
 
 const placeholderSteamId = 'https://steamcommunity.com/id/wishlist_example/'
 const { REACT_APP_SERVER_ENDPOINT, REACT_APP_SERVER_ENDPOINT_DEV, NODE_ENV } = process.env
@@ -11,6 +15,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
+      loading: false,
       value: placeholderSteamId,
       games: [],
       endpoint: NODE_ENV === 'development' ? REACT_APP_SERVER_ENDPOINT_DEV : REACT_APP_SERVER_ENDPOINT
@@ -60,11 +65,24 @@ class App extends Component {
   //dummy data
   _handleSubmit = e => {
     e.preventDefault()
+    this.setState({
+      loading: true
+    })
+    setTimeout(() => {
+      this.setState({
+        games: fakejson,
+        loading: false
+      })
+    }, 3000)
     const fakejson = [
       {
         name: "Game 1",
         streams: [
           { url: "www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 1 - Title 1" },
+          { url: "www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 1 - Title 1" },
+          { url: "www.google.com", viewers: 3, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 1 - Title 2" },
+          { url: "www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 1 - Title 1" },
+          { url: "www.google.com", viewers: 3, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 1 - Title 2" },
           { url: "www.google.com", viewers: 3, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 1 - Title 2" }
         ]
       },
@@ -72,14 +90,15 @@ class App extends Component {
         name: "Game 2",
         streams: [
           { url: "www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 2 - Title 1" },
+          { url: "www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 2 - Title 1" },
+          { url: "www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 2 - Title 1" },
+          { url: "www.google.com", viewers: 8, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 2 - Title 21" },
+          { url: "www.google.com", viewers: 8, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 2 - Title 21" },
           { url: "www.google.com", viewers: 8, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 2 - Title 21" }
         ]
       }
     ]
 
-    this.setState({
-      games: fakejson
-    })
   }
 
   handleChange(event) {
@@ -87,38 +106,97 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        <Container>
-          <Form onSubmit={e => this.handleSubmit(e)}>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Steam Profile</Form.Label>
-              <Form.Control type="text" placeholder={placeholderSteamId} name="profileUrl" value={this.state.value} onChange={this.handleChange} />
-              <Form.Text className="text-muted">
-                Make sure it's set to public.
-              </Form.Text>
-            </Form.Group>
-            <Button variant="primary" type="submit" onClick={e => this.handleSubmit(e)}>
-              Submit
-            </Button>
-          </Form>
-        </Container>
-        {(this.state.games) ? (
-          this.state.games.map((game) => {
-            return (
-              (game.streams.length > 0) ?
-                <Container key={game.name}>
-                  <Card>
-                    <Card.Header as="h2">{game.name}</Card.Header>
-                  </Card>
-                  <CardDeckLayout maxRowLength={4} game={game} />
-                </Container>
-                : null)
-          })
-        ) : null}
-      </div>
-    )
+    const accordionStyles = {
+      textAlign: 'left',
+      border: '.1px solid lightgrey'
+    }
+
+      return (
+          <div className="App">
+            <Container>
+              <Form onSubmit={e => this.handleSubmit(e)}>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Steam Profile</Form.Label>
+                  <Form.Control type="text" placeholder={placeholderSteamId} name="profileUrl" value={this.state.value} onChange={this.handleChange} />
+                  <Form.Text className="text-muted">
+                    Make sure it's set to public.
+                  </Form.Text>
+                </Form.Group>
+                {this.state.loading ? (
+                  <Button variant="primary" type="submit" disabled>
+                    <Spinner
+                      as="span"
+                      animation="grow"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                    Loading...
+                  </Button>
+                ) : (
+                  <Button variant="primary" type="submit" onClick={e => this.handleSubmit(e)}>
+                  Submit
+                  </Button>
+                )}
+              </Form>
+            </Container>
+            {(this.state.games.length) ? (
+              <Container style={{ padding: '1rem', border: '.1px solid lightgrey' , borderRadius: '10px' }}>
+                <Accordion flush={true} style={accordionStyles}>
+                {this.state.games.map((game, gi) => {
+                  return (
+                    <Accordion.Item eventKey={`${gi}`} key={`item ${gi}`}>
+                      <GameAccordionItems game={game} />
+                    </Accordion.Item>
+                  )
+                })}
+                </Accordion>
+              </Container>
+            ) : null}
+          </div>
+        )  
   }
 }
 
+function GameAccordionItems({ game }) {
+  const { name, streams } = game
+  //const { url, viewers, thumbnail, title } = streams
+
+  const style = {
+
+  }
+  return (
+    <>
+      <Accordion.Header fluid>{name}</Accordion.Header>
+      <Accordion.Body>
+      <Row xs={1} md={3} className="g-4">
+        {streams.map(({ url, viewers, thumbnail, title }, idx) => (
+          <Col key={`${name} ${idx}`}>
+            <Card 
+              key={title} 
+              onClick={() => window.location = url} 
+              style={{ 
+                cursor: 'pointer', 
+                //width: '220px', 
+                //textOverflow: 'ellipsis',
+                //overflow: 'hidden'  
+              }}
+              >
+              <Card.Img variant="top" src={thumbnail} />
+              <Card.Body>
+                <Card.Title>{title}</Card.Title>
+                <Card.Text>
+                  Viewers - {viewers}
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+      </Accordion.Body>
+    </>
+  )
+}
+
+//const { url, viewers, thumbnail, title } = props
 export default App;
