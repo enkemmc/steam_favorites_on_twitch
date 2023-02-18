@@ -41,8 +41,10 @@ class App extends Component {
         loading: true
       })
       const json = await fetch(this.state.endpoint + profileid).then(res => res.json())
+      this.setState({
+        loading: false
+      })
       if (json.error) {
-        console.log('there was an error')
         switch (json.error) {
           case 'INVALID_PROFILE':
             alert(`Can't find this profile on steam.`)
@@ -55,11 +57,12 @@ class App extends Component {
             break
         }
       } else {
-        console.log(`setting state`)
-        console.log(json)
         this.setState({ games: json.data, loading: false })
       }
     } catch (e) {
+      this.setState({
+        loading: false
+      })
       alert('Error accessing the server.')
     }
 
