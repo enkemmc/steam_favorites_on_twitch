@@ -1,4 +1,4 @@
-import { Form, Button, Container, Card, CardGroup, CardColumns, Row, Col, CardDeck } from 'react-bootstrap'
+import { Form, Button, Container, Card, CardGroup, CardColumns, Row, Col } from 'react-bootstrap'
 import React, { Component } from 'react';
 import './CustomCards.css'
 
@@ -49,7 +49,7 @@ function CardDeckLayout({ maxRowLength, game }) {
 
   // fill row with empties
   for (let i = 0; i < (numberOfRows * maxRowLength) - game.streams.length; i++) {
-    cardsArr.push(<EmptyCard />)
+    cardsArr.push(<EmptyCard key={`empty ${i}`}/>)
   }
 
   let cardsInDecks = []
@@ -66,9 +66,9 @@ function CardDeckLayout({ maxRowLength, game }) {
 
   function makeRow(rowOfCards, keyIndex) {
     return (
-      <CardDeck key={'row' + keyIndex}>
+      <span key={'row' + keyIndex}>
         {rowOfCards}
-      </CardDeck>
+      </span>
     )
   }
 
