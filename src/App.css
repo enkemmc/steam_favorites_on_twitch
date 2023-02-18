@@ -41,3 +41,13 @@
     transform: rotate(360deg);
   }
 }
+
+.accordion-header.disabled button::after {
+  content: none;
+}
+
+.accordion-header.disabled button {
+  pointer-events: none;
+  cursor: default;
+  color: grey;
+}

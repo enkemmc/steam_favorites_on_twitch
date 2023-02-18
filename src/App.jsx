@@ -37,6 +37,9 @@ class App extends Component {
     }
     const profileid = this.state.value.split('/id/')[1].replace('/', '')
     try {
+      this.setState({
+        loading: true
+      })
       const json = await fetch(this.state.endpoint + profileid).then(res => res.json())
       if (json.error) {
         console.log('there was an error')
@@ -54,7 +57,7 @@ class App extends Component {
       } else {
         console.log(`setting state`)
         console.log(json)
-        this.setState({ games: json.data })
+        this.setState({ games: json.data, loading: false })
       }
     } catch (e) {
       alert('Error accessing the server.')
@@ -73,7 +76,7 @@ class App extends Component {
         games: fakejson,
         loading: false
       })
-    }, 3000)
+    }, 1000)
     const fakejson = [
       {
         name: "Game 1",
@@ -95,6 +98,11 @@ class App extends Component {
           { url: "www.google.com", viewers: 8, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 2 - Title 21" },
           { url: "www.google.com", viewers: 8, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 2 - Title 21" },
           { url: "www.google.com", viewers: 8, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 2 - Title 21" }
+        ]
+      },
+      {
+        name: "Game 3",
+        streams: [
         ]
       }
     ]
@@ -143,7 +151,8 @@ class App extends Component {
             {(this.state.games.length) ? (
               <Container style={{ padding: '1rem', border: '.1px solid lightgrey' , borderRadius: '10px' }}>
                 <Accordion flush={true} style={accordionStyles}>
-                {this.state.games.map((game, gi) => {
+                {this.state.games
+                  .map((game, gi) => {
                   return (
                     <Accordion.Item eventKey={`${gi}`} key={`item ${gi}`}>
                       <GameAccordionItems game={game} />
@@ -161,40 +170,41 @@ class App extends Component {
 function GameAccordionItems({ game }) {
   const { name, streams } = game
   //const { url, viewers, thumbnail, title } = streams
-
-  const style = {
-
-  }
   return (
-    <>
-      <Accordion.Header fluid>{name}</Accordion.Header>
-      <Accordion.Body>
-      <Row xs={1} md={3} className="g-4">
-        {streams.map(({ url, viewers, thumbnail, title }, idx) => (
-          <Col key={`${name} ${idx}`}>
-            <Card 
-              key={title} 
-              onClick={() => window.location = url} 
-              style={{ 
-                cursor: 'pointer', 
-                //width: '220px', 
-                //textOverflow: 'ellipsis',
-                //overflow: 'hidden'  
-              }}
-              >
-              <Card.Img variant="top" src={thumbnail} />
-              <Card.Body>
-                <Card.Title>{title}</Card.Title>
-                <Card.Text>
-                  Viewers - {viewers}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-      </Accordion.Body>
-    </>
+      streams.length ? (
+      <>
+        <Accordion.Header fluid >{name}</Accordion.Header>
+          <Accordion.Body>
+          <Row xs={1} md={3} className="g-4">
+            {streams.map(({ url, viewers, thumbnail, title }, idx) => (
+              <Col key={`${name} ${idx}`}>
+                <Card 
+                  key={title} 
+                  onClick={() => window.location = url} 
+                  style={{ 
+                    cursor: 'pointer', 
+                    //width: '220px', 
+                    //textOverflow: 'ellipsis',
+                    //overflow: 'hidden'  
+                  }}
+                  >
+                  <Card.Img variant="top" src={thumbnail} />
+                  <Card.Body>
+                    <Card.Title>{title}</Card.Title>
+                    <Card.Text>
+                      Viewers - {viewers}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Accordion.Body>
+      </>
+    ) :
+    (
+      <Accordion.Header fluid className="disabled">{name}</Accordion.Header>
+    )
   )
 }
 
