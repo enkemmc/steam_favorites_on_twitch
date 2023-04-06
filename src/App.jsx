@@ -24,9 +24,6 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this._handleSubmit = this._handleSubmit.bind(this)
     console.log(`mode is: ${NODE_ENV}`)
-    for (const [k,v] of Object.entries(process.env)) {
-      console.log(k, v)
-    }
   }
 
   handleSubmit = async e => {
@@ -83,23 +80,23 @@ class App extends Component {
       {
         name: "Game 1",
         streams: [
-          { url: "http://www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 1 - Title 1" },
-          { url: "http://www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 1 - Title 1" },
-          { url: "http://www.google.com", viewers: 3, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 1 - Title 2" },
-          { url: "http://www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 1 - Title 1" },
-          { url: "http://www.google.com", viewers: 3, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 1 - Title 2" },
-          { url: "http://www.google.com", viewers: 3, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 1 - Title 2" }
+          { url: "http://www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-291x164.jpg", title: "Game 1 - Title 1 Game 1 - Title 1 Game 1 - Title 1 Game 1 - Title 1 Game 1 - Title 1 Game 1 - Title 1 " },
+          { url: "http://www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-291x164.jpg", title: "Game 1 - Title 1" },
+          { url: "http://www.google.com", viewers: 3, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-291x164.jpg", title: "Game 1 - Title 2 Game 1 - Title 1 Game 1 - Title 1 Game 1 - Title 1 Game 1 - Title 1 Game 1 - Title 1 Game 1 - Title 1 Game 1 - Title 1 Game 1 - Title 1 " },
+          { url: "http://www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-291x164.jpg", title: "Game 1 - Title 1" },
+          { url: "http://www.google.com", viewers: 3, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-291x164.jpg", title: "Game 1 - Title 2" },
+          { url: "http://www.google.com", viewers: 3, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-291x164.jpg", title: "Game 1 - Title 2" }
         ]
       },
       {
         name: "Game 2",
         streams: [
-          { url: "http://www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 2 - Title 1" },
-          { url: "http://www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 2 - Title 1" },
-          { url: "http://www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 2 - Title 1" },
-          { url: "http://www.google.com", viewers: 8, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 2 - Title 21" },
-          { url: "http://www.google.com", viewers: 8, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 2 - Title 21" },
-          { url: "http://www.google.com", viewers: 8, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-110x110.jpg", title: "Game 2 - Title 21" }
+          { url: "http://www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-291x164.jpg", title: "Game 2 - Title 1" },
+          { url: "http://www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-291x164.jpg", title: "Game 2 - Title 1" },
+          { url: "http://www.google.com", viewers: 4, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-291x164.jpg", title: "Game 2 - Title 1" },
+          { url: "http://www.google.com", viewers: 8, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-291x164.jpg", title: "Game 2 - Title 21" },
+          { url: "http://www.google.com", viewers: 8, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-291x164.jpg", title: "Game 2 - Title 21" },
+          { url: "http://www.google.com", viewers: 8, thumbnail: "https://static-cdn.jtvnw.net/ttv-static/404_preview-291x164.jpg", title: "Game 2 - Title 21" }
         ]
       },
       {
@@ -108,7 +105,6 @@ class App extends Component {
         ]
       }
     ]
-
   }
 
   handleChange(event) {
@@ -187,6 +183,7 @@ function GameAccordionItems({ game }) {
   const handleClick = url => {
     window.open(url, "_blank")
   }
+
   return (
       streams.length ? (
       <>
@@ -204,7 +201,7 @@ function GameAccordionItems({ game }) {
                   >
                   <Card.Img variant="top" src={thumbnail} />
                   <Card.Body>
-                    <Card.Title>{title}</Card.Title>
+                    <Card.Text className="custom-card-text">{title}</Card.Text>
                     <Card.Text>
                       Viewers - {viewers}
                     </Card.Text>
