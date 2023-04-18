@@ -16,17 +16,27 @@ code {
 .custom-card-text {
   font-weight: 500;
   text-overflow: ellipsis;
-  height: 45px;
-  -webkit-line-clamp: 2;
+  height: 25px;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   display: -webkit-box;
   overflow: hidden;
+  margin-bottom: 0px;
+}
+
+ul {
+  padding-left: 0px;
 }
 
 .card {
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .card:hover {
-  transform: translateY(-2%);
+  transform: translateY(-4%);
+}
+
+.shade {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

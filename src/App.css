@@ -3,6 +3,35 @@
   justify-content: center;
 }
 
-.mycol {
-  
+@media (max-width: 768px) {
+  .myrow {
+    justify-content: flex-start;
+    padding-left: 12px;
+  }
+}
+
+.loader {
+  align-items: center;
+  display: flex;
+  min-width: 115px;
+  justify-content: center;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.steam {
+  position: fixed;
+  object-fit: cover;
+  background-repeat:no-repeat;
+  opacity: 0.2;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }

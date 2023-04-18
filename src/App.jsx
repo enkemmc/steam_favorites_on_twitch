@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Spinner from 'react-bootstrap/Spinner'
 import './App.css'
+import SteamPic from './assets/steam2.gif'
 
 const placeholderSteamId = 'https://steamcommunity.com/id/wishlist_example/'
 const { REACT_APP_SERVER_ENDPOINT, REACT_APP_SERVER_ENDPOINT_DEV, NODE_ENV } = process.env
@@ -75,7 +76,7 @@ class App extends Component {
         games: fakejson,
         loading: false
       })
-    }, 1000)
+    }, 300)
     const fakejson = [
       {
         name: "Game 1",
@@ -119,11 +120,16 @@ class App extends Component {
 
     return (
       <div className="App">
-      <Container >
-        <div className="myrow">
+        <Steam />
+      <Container
+          style={{
+            paddingBottom: '20px'
+          }}
+        > 
+        <div className="myrow" style={{ paddingTop: '50px' }}>
           <div className="mycol">
             <h1>Steam Streamer</h1>
-            <ul style={{ listStyleType: 'none', padding: 'auto' }}>
+            <ul style={{ listStyleType: 'none', padding: 'auto', paddingTop: '10px' }}>
               <li>1. Add some games to your steam wishlist.</li>
               <li>2. Set your profile to public.</li>
               <li>3. Enter your steam profile URL below.</li>
@@ -140,18 +146,19 @@ class App extends Component {
           </div>
           <div>
             {this.state.loading ? (
-              <Button variant="primary" type="submit" disabled>
+              <Button variant="primary" type="submit" disabled className="loader">
                 <Spinner
                   as="span"
-                  animation="grow"
+                  animation="border"
                   size="sm"
                   role="status"
                   aria-hidden="true"
+                  style={{ marginRight: '5px' }}
                 />
                 Loading...
               </Button>
             ) : (
-              <Button variant="primary" type="submit" onClick={e => this.handleSubmit(e)}>
+              <Button variant="primary" type="submit" onClick={e => this.handleSubmit(e)} className="loader">
               Submit   
               </Button>
             )}
@@ -159,7 +166,9 @@ class App extends Component {
         </div>
         </Container>
           {(this.state.games.length) ? (
-            <Container style={{ padding: '1rem', border: '.1px solid lightgrey' , borderRadius: '10px' }}>
+            <Container 
+            className="shade"
+            style={{ padding: '1rem', border: '.1px solid lightgrey' , borderRadius: '10px' }}>
               <Accordion flush={true} style={accordionStyles} defaultActiveKey="0">
               {this.state.games
                 .map((game, gi) => {
@@ -189,21 +198,19 @@ function GameAccordionItems({ game }) {
       <>
         <Accordion.Header fluid="true" >{`${name} (${streams.length})`}</Accordion.Header>
           <Accordion.Body>
-          <Row xs={2} md={3} lg={4} className="g-4">
+          <Row xs={1} md={3} lg={4} className="g-4">
             {streams.map(({ url, viewers, thumbnail, title }, idx) => (
               <Col key={`${name} ${idx}`}>
                 <Card 
                   key={title} 
                   onClick={() => handleClick(url)} 
-                  style={{ 
-                    cursor: 'pointer', 
-                  }}
+                  className="shade"
                   >
                   <Card.Img variant="top" src={thumbnail} />
                   <Card.Body>
                     <Card.Text className="custom-card-text">{title}</Card.Text>
                     <Card.Text>
-                      Viewers - {viewers}
+                      {viewers} viewers
                     </Card.Text>
                   </Card.Body>
                 </Card>
@@ -216,6 +223,17 @@ function GameAccordionItems({ game }) {
     (
       <Accordion.Header fluid className="disabled">{name}</Accordion.Header>
     )
+  )
+}
+
+const Steam = () => {
+  return (
+    <div
+      className="steam"
+      style={{
+        backgroundImage: `url(${SteamPic})`,
+      }}
+    />
   )
 }
 

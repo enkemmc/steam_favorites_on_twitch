@@ -19,6 +19,7 @@ goodstuff.zip
 .env.test.local
 .env.production.local
 .env
+*.pem
 server/certs
 
 npm-debug.log*
