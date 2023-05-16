@@ -20,4 +20,4 @@ BEARER_TOKEN=yourbearertokenhere
 5. PROFIT!
 
 ## Why
-I grew up PC gaming, so I've used Steam since it came out.  It's often hard to tell whether a game is going to be worth your time.  This app helps you top quickly "try it before you buy it."
+I grew up PC gaming, so I've used Steam since it came out.  It's often hard to tell whether a game is going to be worth your time.  This app helps you to quickly "try it before you buy it."

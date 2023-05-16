@@ -37,5 +37,6 @@
   "devDependencies": {
     "gh-pages": "^4.0.0",
     "jest": "^27.5.1"
-  }
+  },
+  "proxy": "https://api.llyth.net/api/steam_favorites_on_twitch"
 }

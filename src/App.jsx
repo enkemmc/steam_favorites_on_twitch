@@ -9,7 +9,7 @@ import './App.css'
 import SteamPic from './assets/steam2.gif'
 
 const placeholderSteamId = 'https://steamcommunity.com/id/wishlist_example/'
-const { REACT_APP_SERVER_ENDPOINT, REACT_APP_SERVER_ENDPOINT_DEV, NODE_ENV } = process.env
+const { REACT_APP_SERVER_ENDPOINT, NODE_ENV } = process.env
 
 class App extends Component {
 
@@ -19,7 +19,7 @@ class App extends Component {
       loading: false,
       value: placeholderSteamId,
       games: [],
-      endpoint: NODE_ENV === 'development' ? REACT_APP_SERVER_ENDPOINT_DEV : REACT_APP_SERVER_ENDPOINT
+      endpoint: NODE_ENV === 'development' ? '/' : REACT_APP_SERVER_ENDPOINT
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
